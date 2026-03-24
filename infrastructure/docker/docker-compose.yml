@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  incident-timeline-api:
+    build:
+      context: ../..
+      dockerfile: infrastructure/docker/Dockerfile
+    container_name: incident-timeline-api
+    environment:
+      APP_LOG_FILE: tests/testdata/sample_logs.txt
+      LOG_LEVEL: INFO
+    ports:
+      - "5001:5001"
+    restart: unless-stopped

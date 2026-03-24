@@ -1,0 +1,11 @@
+2026-03-19 09:00:00 INFO Service boot initiated
+2026-03-19 09:02:00 INFO Database connected
+2026-03-19 09:05:00 ERROR API gateway timeout
+2026-03-19 09:06:30 ERROR Worker queue stalled
+2026-03-19 09:08:00 WARNING Retrying downstream connection
+2026-03-19 09:10:00 INFO Service recovery completed
+2026-03-19 09:15:00 ERROR Cache node unavailable
+2026-03-19 09:18:00 INFO Cache node restored
+2026-03-19 11:00:00 ERROR New crash
+2026-03-19 11:30:00 ERROR Duplicate test
+2026-03-19 12:00:00 ERROR Test crash

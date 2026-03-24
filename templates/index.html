@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incident Timeline Dashboard</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 20px;
+            background: #f9f9f9;
+            color: #1f2937;
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 12px;
+        }
+
+        .metrics {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            margin-bottom: 30px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        .incidents {
+            margin-top: 10px;
+        }
+
+        .card {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .muted {
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body>
+    <h1>Incident Timeline Dashboard</h1>
+    <h3>Real-Time Log Monitoring Dashboard</h3>
+
+    <div class="metrics">
+        <b>Total Incidents:</b> {{ total_incidents }} <br>
+        <b>Total Errors:</b> {{ total_errors }}
+    </div>
+
+    <h2>Timeline</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>Level</th>
+                <th>Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in timeline %}
+            <tr>
+                <td>{{ event.timestamp }}</td>
+                <td
+                    {% if event.level == "ERROR" %}
+                        style="color:red;"
+                    {% elif event.level == "WARNING" %}
+                        style="color:orange;"
+                    {% else %}
+                        style="color:green;"
+                    {% endif %}
+                >
+                    {{ event.level }}
+                </td>
+                <td>{{ event.message }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="3" class="muted">No timeline events found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Incidents</h2>
+    <div class="incidents">
+        {% for inc in incidents %}
+        <div class="card">
+            <p><strong>Start time:</strong> {{ inc.start_time }}</p>
+            <p><strong>End time:</strong> {{ inc.end_time or "Open" }}</p>
+            <p><strong>Status:</strong> {{ inc.status }}</p>
+            <p><strong>Event count:</strong> {{ inc.event_count }}</p>
+        </div>
+        {% else %}
+        <div class="card">
+            <p class="muted">No incidents detected.</p>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

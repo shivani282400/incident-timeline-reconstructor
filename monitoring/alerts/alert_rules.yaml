@@ -1,0 +1,5 @@
+alerts:
+  - name: error-log-detected
+    description: Trigger when one or more ERROR log entries are found.
+    script: python3 monitoring/alerts/check_error_logs.py tests/testdata/sample_logs.txt
+    severity: critical
